@@ -71,7 +71,7 @@ public class ProcessoBean {
 		this.podeInserir = podeInserir;
 	}
 	public void deletarProcesso(Processo processo){
-		addMessage("Ação condluída", "Processo de número: " + processo.getNumeroProcesso() + ", excluído com sucesso!");
+		addMessage("Ação concluída", "Processo de número: " + processo.getNumeroProcesso() + ", excluído com sucesso!");
 		
 		new DAO<Processo>(Processo.class).remover(processo);
 	}

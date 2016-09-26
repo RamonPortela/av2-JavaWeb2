@@ -18,27 +18,46 @@
 		<h:form>
 			<p:growl id="message" showDetail="true" />
 		
-			<p:dataTable var="processo" value="#{processoBean.processos}" emptyMessage="Não há processos cadastrados" tableStyle="width:auto">
+			<p:dataTable id="tbl" var="processo" value="#{processoBean.processos}" emptyMessage="Não há processos cadastrados" tableStyle="width:100%" paginatorTemplate="{Exporters}" paginator="true" rows="1000" style="margin-bottom:20px">
 			
-				<p:columnGroup type="header">
+			<f:facet name="{Exporters}">
+				<h:commandLink>
+					<p:graphicImage value="../../images/pdf.png" width="24" />
+					<p:dataExporter type="pdf" target="tbl" fileName="processos" encoding="iso-8859-1" />
+				</h:commandLink>
+			</f:facet>
+			
+				  <p:columnGroup type="header">
 					
 					<p:column headerText="Número Do Processo"></p:column>
 					<p:column headerText="Razão Social / CNPJ"></p:column>
 					<p:column headerText="Fiscal Resposável"></p:column>
 					<p:column headerText="Data do Relato"></p:column>
-					<p:column colspan="3" width="10%" headerText="Ações"></p:column>
+					<p:column colspan="2" width="10%" headerText="Ações"></p:column>
 				</p:columnGroup>
 			
 				<p:column>
+		            <f:facet name="header">
+                		<h:outputText value="Número Do Processo" />
+            		</f:facet>
 					<h:outputText value="#{processo.numeroProcesso}" />
 				</p:column>
 				<p:column>
+		            <f:facet name="header">
+                		<h:outputText value="Razão Social / CNPJ" />
+            		</f:facet>
 					<h:outputText value="#{processo.fornecedor.razaoSocial}" /> / <h:outputText value="#{processo.fornecedor.cnpj}" />
 				</p:column>
 				<p:column>
+		            <f:facet name="header">
+                		<h:outputText value="Fiscal Resposável" />
+            		</f:facet>
 					<h:outputText value="#{processo.fiscalResponsavel}" />
 				</p:column>
 				<p:column>
+		            <f:facet name="header">
+                		<h:outputText value="Data do Relato" />
+            		</f:facet>
 					<h:outputText value="#{processo.dataRelato}">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
@@ -46,14 +65,13 @@
 					
 				
 			
-				<p:column>
+				<p:column  exportable="false">
 					<p:commandButton icon="ui-icon-pencil" action="#{processoBean.editarProcesso(true, processo)}">
 					</p:commandButton>
 				</p:column>
-				<p:column><p:commandButton icon="ui-icon-trash"  update="@form" actionListener="#{processoBean.deletarProcesso(processo)}" >
+				<p:column  exportable="false"><p:commandButton icon="ui-icon-trash"  update="@form" actionListener="#{processoBean.deletarProcesso(processo)}" >
 					<p:confirm header="Confirmar exclusão" message="Deseja mesmo excluir o processo: #{processo.numeroProcesso}?" icon="ui-icon-alert" />
 				</p:commandButton></p:column>
-				<p:column><p:commandButton icon="ui-icon-document"></p:commandButton></p:column>
 	    	</p:dataTable>
 	 	    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 			   <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>

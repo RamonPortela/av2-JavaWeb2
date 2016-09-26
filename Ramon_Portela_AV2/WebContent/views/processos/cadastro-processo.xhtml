@@ -26,7 +26,7 @@
 						<p:outputLabel value="CNPJ:"/>
 						<p:inputMask disabled="#{processoBean.editar == true}" id="cnpj" mask="99.999.999/9999-99" value="#{processoBean.processo.fornecedor.cnpj}"  required="#{not empty param[save.clientId]}" requiredMessage="Campo CPNJ é obrigatório" maxlength="14">
 						</p:inputMask>						
-						<p:commandButton icon="ui-icon-search" action="#{processoBean.pesquisarFornecedor(processoBean.processo.fornecedor.cnpj)}" update="@form"></p:commandButton>				
+						<p:commandButton rendered="#{processoBean.editar == false}" icon="ui-icon-search" action="#{processoBean.pesquisarFornecedor(processoBean.processo.fornecedor.cnpj)}" update="@form"></p:commandButton>				
 						<p:message for="cnpj"></p:message>						
 					</div>
 					<div>
