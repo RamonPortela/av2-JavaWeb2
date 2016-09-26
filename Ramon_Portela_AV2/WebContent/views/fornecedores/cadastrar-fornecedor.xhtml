@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Cadastro de Fornecedor</title>
+</h:head>
+<h:body>
+	<div>
+		<h1>Cadastro de Fornecedor</h1>
+		<div>
+			<h:form id="cadastroFornecedorForm" >
+				<p:fieldset legend="Dados do Fornecedor">
+					<div>
+						<p:outputLabel value="CNPJ:"/>
+						<p:inputMask id="cnpj" mask="99.999.999/9999-99" value="#{fornecedorBean.fornecedor.cnpj}" required="true" requiredMessage="Campo CPNJ é obrigatório" maxlength="14"></p:inputMask>
+						<p:message for="cnpj"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="Razão Social:"></p:outputLabel>
+						<p:inputText id="razaoSocial" value="#{fornecedorBean.fornecedor.razaoSocial}" required="true" requiredMessage="Campo Razão Social é obrigatório" maxlength="200"></p:inputText>
+						<p:message for="razaoSocial"></p:message>
+					</div>
+										
+				</p:fieldset>
+				<p:fieldset legend="Endereço">
+					<div>
+						<p:outputLabel value="Logradouro:"></p:outputLabel>
+						<p:inputText id="endereco" value="#{fornecedorBean.fornecedor.endereco.logradouro}" required="true" requiredMessage="Campo Logradouro é obrigatório" maxlength="100"></p:inputText>
+						<p:message for="endereco"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="Número:"></p:outputLabel>
+						<p:inputText id="numero" value="#{fornecedorBean.fornecedor.endereco.numero}" required="true" requiredMessage="Campo Número é obrigatório" maxlength="50"></p:inputText>
+						<p:message for="numero"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="Complemento:"></p:outputLabel>
+						<p:inputText value="#{fornecedorBean.fornecedor.endereco.complemento}" maxlength="50"></p:inputText>
+					</div>
+					<div>
+						<p:outputLabel value="Bairro:"></p:outputLabel>
+						<p:inputText id="bairro" value="#{fornecedorBean.fornecedor.endereco.bairro}" required="true" requiredMessage="Campo Bairro é obrigatório" maxlength="100"></p:inputText>
+						<p:message for="bairro"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="CEP:"></p:outputLabel>
+						<p:inputMask id="cep" mask="99999-999" value="#{fornecedorBean.fornecedor.endereco.cep}" required="true" requiredMessage="Campo CEP é obrigatório" maxlength="8"></p:inputMask>
+						<p:message for="cep"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="Município:"></p:outputLabel>
+						<p:inputText id="municipio" value="#{fornecedorBean.fornecedor.endereco.municipio}" required="true" requiredMessage="Campo Município é obrigatório" maxlength="200"></p:inputText>
+						<p:message for="municipio"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="UF:"></p:outputLabel>
+						<p:selectOneMenu id="uf" value="#{fornecedorBean.fornecedor.endereco.uf}" required="true" requiredMessage="Seleciona um Estado">
+							<f:selectItem itemLabel="Selecione um estado" itemValue="" noSelectionOption="true" />
+							<f:selectItem itemLabel="Acre" itemValue="AC" />
+							<f:selectItem itemLabel="Alagoas" itemValue="AL"/> 
+							<f:selectItem itemLabel="Amapá" itemValue="AP"/> 
+							<f:selectItem itemLabel="Amazonas" itemValue="AM"/> 
+							<f:selectItem itemLabel="Bahia" itemValue="BA"/> 
+							<f:selectItem itemLabel="Ceará" itemValue="CE"/> 
+							<f:selectItem itemLabel="Distrito Federal" itemValue="DF"/> 
+							<f:selectItem itemLabel="Espírito Santo" itemValue="ES"/> 
+							<f:selectItem itemLabel="Goiás" itemValue="GO"/> 
+							<f:selectItem itemLabel="Maranhão" itemValue="MA"/> 
+							<f:selectItem itemLabel="Mato Grosso" itemValue="MT"/> 
+							<f:selectItem itemLabel="Mato Grosso do Sul" itemValue="MS"/> 
+							<f:selectItem itemLabel="Minas Gerais" itemValue="MG"/> 
+							<f:selectItem itemLabel="Pará" itemValue="PA"/> 
+							<f:selectItem itemLabel="Paraíba" itemValue="PB"/> 
+							<f:selectItem itemLabel="Paraná" itemValue="PR"/> 
+							<f:selectItem itemLabel="Pernambuco" itemValue="PE"/> 
+							<f:selectItem itemLabel="Piauí" itemValue="PI"/> 
+							<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ"/> 
+							<f:selectItem itemLabel="Rio Grande do Norte" itemValue="RN"/> 
+							<f:selectItem itemLabel="Rio Grande do Sul" itemValue="RS"/> 
+							<f:selectItem itemLabel="Rondônia" itemValue="RO"/> 
+							<f:selectItem itemLabel="Roraima" itemValue="RR"/> 
+							<f:selectItem itemLabel="Santa Catarina" itemValue="SC"/> 
+							<f:selectItem itemLabel="São Paulo" itemValue="SP"/> 
+							<f:selectItem itemLabel="Sergipe" itemValue="SE"/> 
+							<f:selectItem itemLabel="Tocantins" itemValue="TO"/> 
+						</p:selectOneMenu>
+						<p:message for="uf"></p:message>
+					</div>					
+				</p:fieldset>	
+				<p:fieldset legend="Outra Informações">
+					<div>
+						<p:outputLabel value="Inscrição Municipal:"></p:outputLabel>
+						<p:inputMask mask="9.999.999-9" maxlength="8" value="#{fornecedorBean.fornecedor.inscricaoMunicipal}"></p:inputMask>
+					</div>
+					<div>
+						<p:outputLabel value="Receita Bruta:"></p:outputLabel>
+						<p:inputText id="receitaBruta" value="#{fornecedorBean.fornecedor.receitaBruta}" required="true" requiredMessage="Campo Receita Bruta é obrigatório">
+							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+						</p:inputText>
+						<p:message for="receitaBruta"></p:message>
+					</div>
+				</p:fieldset>		
+				
+				<div>
+					<p:commandButton value="Cadastrar" id="cadastrar" ajax="false" action="#{fornecedorBean.salvar()}" /> 
+				</div>
+					
+			</h:form>
+		</div>
+		<div>
+			<a href="fornecedor.xhtml">voltar</a>
+		</div>
+	</div>
+</h:body>
+</html>

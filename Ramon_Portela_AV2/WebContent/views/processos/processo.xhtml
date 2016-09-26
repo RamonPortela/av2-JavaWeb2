@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Lista de Processos</title>
+</h:head>
+<h:body>
+	<div>
+		<h1>Processos</h1>
+		<div>
+			<p:commandLink action="#{processoBean.editarProcesso(false, null)}" value="Cadastrar Processo"></p:commandLink>
+		</div>
+		<div>
+		<h:form>
+			<p:growl id="message" showDetail="true" />
+		
+			<p:dataTable var="processo" value="#{processoBean.processos}" emptyMessage="Não há processos cadastrados" tableStyle="width:auto">
+			
+				<p:columnGroup type="header">
+					
+					<p:column headerText="Número Do Processo"></p:column>
+					<p:column headerText="Razão Social / CNPJ"></p:column>
+					<p:column headerText="Fiscal Resposável"></p:column>
+					<p:column headerText="Data do Relato"></p:column>
+					<p:column colspan="3" width="10%" headerText="Ações"></p:column>
+				</p:columnGroup>
+			
+				<p:column>
+					<h:outputText value="#{processo.numeroProcesso}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{processo.fornecedor.razaoSocial}" /> / <h:outputText value="#{processo.fornecedor.cnpj}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{processo.fiscalResponsavel}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{processo.dataRelato}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+					
+				
+			
+				<p:column>
+					<p:commandButton icon="ui-icon-pencil" action="#{processoBean.editarProcesso(true, processo)}">
+					</p:commandButton>
+				</p:column>
+				<p:column><p:commandButton icon="ui-icon-trash"  update="@form" actionListener="#{processoBean.deletarProcesso(processo)}" >
+					<p:confirm header="Confirmar exclusão" message="Deseja mesmo excluir o processo: #{processo.numeroProcesso}?" icon="ui-icon-alert" />
+				</p:commandButton></p:column>
+				<p:column><p:commandButton icon="ui-icon-document"></p:commandButton></p:column>
+	    	</p:dataTable>
+	 	    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			   <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+			   <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+			</p:confirmDialog>
+			</h:form>
+		</div>
+		<div>
+			<a href="../index.xhtml">voltar</a>
+		</div>
+	</div>
+</h:body>
+
+
+
+</html>

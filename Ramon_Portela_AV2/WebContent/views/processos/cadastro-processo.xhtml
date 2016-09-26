@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Cadastro de Processo</title>
+</h:head>
+<h:body>
+	<div>
+		<h1>Cadastro de Processo</h1>
+		<div>
+			<h:form id="cadastroProcesso" >
+				<p:dialog header="Dados do Fornecedor" widgetVar="dlg2" modal="true" height="100">
+					<h:outputText rendered="#{empty processoBean.processo.fornecedor.cnpj == true}" value="CNPJ não encontrado" />
+    				<h:outputText rendered="#{empty processoBean.processo.fornecedor.cnpj == false}" value="CNPJ: " /><h:outputText value="#{processoBean.processo.fornecedor.cnpj}" /><br/>
+    				<h:outputText rendered="#{empty processoBean.processo.fornecedor.cnpj == false}" value="Razão Social: " /><h:outputText value="#{processoBean.processo.fornecedor.razaoSocial}" /><br/>
+    				<h:outputText rendered="#{empty processoBean.processo.fornecedor.cnpj == false}" value="Endereço: " /><h:outputText value="#{processoBean.processo.fornecedor.endereco.logradouro}" /><br/>
+    				<h:outputText rendered="#{empty processoBean.processo.fornecedor.cnpj == false}" value="Inscrição Municipal: " /><h:outputText value="#{processoBean.processo.fornecedor.inscricaoMunicipal}" /><br/>
+				</p:dialog>   
+			
+				<p:fieldset legend="Dados do Fornecedor">
+					<div>						
+						<p:outputLabel value="CNPJ:"/>
+						<p:inputMask disabled="#{processoBean.editar == true}" id="cnpj" mask="99.999.999/9999-99" value="#{processoBean.processo.fornecedor.cnpj}"  required="#{not empty param[save.clientId]}" requiredMessage="Campo CPNJ é obrigatório" maxlength="14">
+						</p:inputMask>						
+						<p:commandButton icon="ui-icon-search" action="#{processoBean.pesquisarFornecedor(processoBean.processo.fornecedor.cnpj)}" update="@form"></p:commandButton>				
+						<p:message for="cnpj"></p:message>						
+					</div>
+					<div>
+						<p:outputLabel value="Razão Social:" rendered="#{processoBean.editar}" ></p:outputLabel>
+						<p:inputText disabled="true" rendered="#{processoBean.editar}" id="razaoSocial" value="#{processoBean.processo.fornecedor.razaoSocial}" required="#{not empty param[save.clientId]}" requiredMessage="Campo Razão Social é obrigatório" maxlength="200"></p:inputText>
+						<p:message for="razaoSocial"></p:message>
+					</div>	
+					<div>
+						<p:outputLabel value="Inscrição Municipal:"  rendered="#{processoBean.editar}" ></p:outputLabel>
+						<p:inputMask disabled="true"  rendered="#{processoBean.editar}"  mask="9.999.999-9" maxlength="8" value="#{processoBean.processo.fornecedor.inscricaoMunicipal}"></p:inputMask>
+					</div>
+					<div>
+						<p:outputLabel value="Receita Bruta:" rendered="#{processoBean.editar}"></p:outputLabel>
+						<p:inputText disabled="true"  rendered="#{processoBean.editar}"  id="receitaBruta" value="#{processoBean.processo.fornecedor.receitaBruta}" required="true" requiredMessage="Campo Receita Bruta é obrigatório">
+							<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+						</p:inputText>
+						<p:message for="receitaBruta"></p:message>
+					</div>					
+				</p:fieldset>
+				<p:fieldset legend="Dados do Processo">
+					<div>
+						<p:outputLabel value="Relato da Fiscalização:"></p:outputLabel>
+						<p:inputText id="relatoFiscalizacao" value="#{processoBean.processo.relatoFiscalizacao}" required="#{not empty param[save.clientId]}" requiredMessage="Campo Relato da Fiscalização é obrigatório" maxlength="1000"></p:inputText>
+						<p:message for="relatoFiscalizacao"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="Data do Relato:"></p:outputLabel>
+						<p:inputMask mask="99/99/9999" id="dataRelato" value="#{processoBean.processo.dataRelato}" required="#{not empty param[save.clientId]}" requiredMessage="Campo Data do Relato é obrigatório" maxlength="10">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:inputMask>
+						<p:message for="dataRelato"></p:message>
+					</div>
+					<div>
+						<p:outputLabel value="Fiscal Resposável:"></p:outputLabel>
+						<p:inputText id="fiscalResponsavel" value="#{processoBean.processo.fiscalResponsavel}" required="#{not empty param[save.clientId]}" requiredMessage="Campo Fiscal Resposável é obrigatório" maxlength="100"></p:inputText>
+						<p:message for="fiscalResponsavel"></p:message>
+					</div>
+				</p:fieldset>		
+				
+				<div>
+					<p:commandButton disabled="#{processoBean.podeInserir == false and processoBean.editar == false}" binding="#{save}" value="Salvar Processo" icon="ui-icon-disk" id="cadastrar" update="cadastroProcesso" action="#{processoBean.salvar()}" /> 
+				</div>
+					
+			</h:form>
+		</div>
+		<div>
+			<a href="processo.xhtml">voltar</a>
+		</div>
+	</div>
+</h:body>
+</html>

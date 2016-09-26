@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Lista de Fornecedores</title>
+</h:head>
+<h:body>
+	<div>
+		<h1>Fornecedores</h1>
+		<div>
+			<a href="cadastrar-fornecedor.xhtml">Cadastrar Fornecedor</a>
+		</div>
+		<div>
+			<p:dataTable var="fornecedor" value="#{fornecedorBean.fornecedores}" emptyMessage="Não há fornecedores cadastrados">
+				<p:column headerText="Cnpj">
+					<h:outputText value="#{fornecedor.cnpj}" />
+				</p:column>
+				<p:column headerText="Razão Social">
+					<h:outputText value="#{fornecedor.razaoSocial}" />
+				</p:column>
+				<p:column headerText="Inscrição Municipal">
+					<h:outputText value="#{fornecedor.inscricaoMunicipal}" />
+				</p:column>
+				<p:column headerText="Receita Bruta">
+					R$ <h:outputText value="#{fornecedor.receitaBruta}" />
+				</p:column>
+			</p:dataTable>
+		</div>
+		<div>
+			<a href="../index.xhtml">voltar</a>
+		</div>
+	</div>
+</h:body>
+</html>
