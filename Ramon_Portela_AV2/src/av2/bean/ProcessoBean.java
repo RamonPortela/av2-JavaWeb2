@@ -1,5 +1,6 @@
 package av2.bean;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -80,6 +81,9 @@ public class ProcessoBean {
 		if(processo.getId() != null)
 			new DAO<Processo>(Processo.class).atualizar(processo, processo.getFornecedor().getCnpj());
 		else{
+			Date agora = new Date();
+			
+			processo.getDataRelato().setTime(agora.getTime());
 			new DAO<Processo>(Processo.class).adicionar(processo, processo.getFornecedor().getCnpj());
 		}
 		
@@ -89,7 +93,6 @@ public class ProcessoBean {
 	}
 	
 	public void pesquisarFornecedor(String cnpj){
-		@SuppressWarnings("unused")
 		Fornecedor f = new DAO<Fornecedor>(Fornecedor.class).buscarCnpj(cnpj);
 		
 		if(f != null){
